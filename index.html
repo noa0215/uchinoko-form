@@ -13,7 +13,7 @@
     const GOOGLE_FORM_URL = "https://forms.gle/52e57F3B8pMcVTqh6";
 
     async function main() {
-      await liff.init({ liffId: "2007714606-KZIRDoDw" }); // ← 🔧正しい LIFF ID
+      await liff.init({ liffId: "2007714606-KZIRDoDw" });  // ✅ 正しいID！
 
       if (!liff.isLoggedIn()) {
         liff.login();
@@ -42,6 +42,3 @@
   </script>
 </body>
 </html>
-
-
-
