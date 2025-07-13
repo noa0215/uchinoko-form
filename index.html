@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>うちの子コンシェルジュ 登録ページ</title>
@@ -9,48 +9,38 @@
   <p>LINEでログイン中です。Googleフォームに移動します...</p>
 
   <script>
-    const LIFF_ID = "2007714606-nkVA9EVg"; // ← あなたのLIFF ID（変更不要）
-    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/gphlbogr5fhb9nj42ezwxnjgdlwqlmh9"; // ← MakeのWebhook URL（OK）
-    const GOOGLE_FORM_URL = "https://forms.gle/52e57F3B8pMcVTqh6"; // ← GoogleフォームURL（OK）
+    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/gphlbogr5fhb9nj42ezwxnjgdlwqlmh9"; // MakeのWebhook URL
+    const GOOGLE_FORM_URL = "https://forms.gle/52e57F3B8pMcVTqh6"; // GoogleフォームのURL
 
     async function main() {
-      console.log("LIFF開始");
-
-      await liff.init({ liffId: LIFF_ID });
-      console.log("LIFF初期化完了");
+      await liff.init({ liffId: "2007714606-wDlpmdmy" }); // ← 正しいLIFF IDに修正済み
 
       if (!liff.isLoggedIn()) {
-        console.log("未ログイン、ログイン開始");
         liff.login();
         return;
       }
 
-      console.log("ログイン済み、プロフィール取得中...");
       const profile = await liff.getProfile();
-      console.log("プロフィール取得成功:", profile);
-
       const userId = profile.userId;
 
       try {
-        const res = await fetch(MAKE_WEBHOOK_URL, {
+        await fetch(MAKE_WEBHOOK_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify({ userId })
         });
-        console.log("Webhook送信完了:", await res.text());
-      } catch (error) {
-        console.error("Webhook送信エラー:", error);
+      } catch (e) {
+        console.error("Webhook送信エラー:", e);
       }
 
-      // Googleフォームへ遷移
       window.location.href = GOOGLE_FORM_URL;
     }
 
-    main().catch(err => {
-      console.error("main() エラー:", err);
-      alert("エラーが発生しました。もう一度お試しください。");
-    });
+    main().catch(console.error);
   </script>
 </body>
 </html>
+
 
