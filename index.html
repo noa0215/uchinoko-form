@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>うちの子コンシェルジュ 登録ページ</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
@@ -9,11 +9,11 @@
   <p>LINEでログイン中です。Googleフォームに移動します...</p>
 
   <script>
-    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/gphlbogr5fhb9nj42ezwxnjgdlwqlmh9";
-    const GOOGLE_FORM_URL = "https://forms.gle/52e57F3B8pMcVTqh6";
+    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/gphlbogr5fhb9nj42ezwxnjgdlwqlmh9";  // MakeのWebhook
+    const GOOGLE_FORM_URL = "https://forms.gle/52e57F3B8pMcVTqh6"; // GoogleフォームURL
 
     async function main() {
-      await liff.init({ liffId: "2007714606-KZIRDoDw" });  // ✅ 正しいID！
+      await liff.init({ liffId: "2007714606-KZIRDoDw" });  // ← ✅ここが重要!!
 
       if (!liff.isLoggedIn()) {
         liff.login();
