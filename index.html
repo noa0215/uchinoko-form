@@ -9,11 +9,11 @@
   <p>LINEでログイン中です。Googleフォームに移動します...</p>
 
   <script>
-    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/uxvshi0cnni32dq96fwaa9ixrd63cyey";  // ← MakeのWebhook URL
-    const GOOGLE_FORM_URL = "https://forms.gle/52e57F3B8pMcVTqh6";  // ← GoogleフォームURL
+    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/uxvshi0cnni32dq96fwaa9ixrd63cyey";  // Make Webhook
+    const GOOGLE_FORM_URL = "https://forms.gle/52e57F3B8pMcVTqh6";  // Googleフォーム
 
     async function main() {
-      await liff.init({ liffId: "2007714606-nkVA9EVg" }); // ← ご自身のLIFF ID
+      await liff.init({ liffId: "2007714606-KZIRDoDw" });  // ✅ 正しいLIFF IDに修正済み
 
       if (!liff.isLoggedIn()) {
         liff.login();
@@ -35,6 +35,7 @@
         console.error("Webhook送信エラー:", e);
       }
 
+      // Googleフォームにリダイレクト
       window.location.href = GOOGLE_FORM_URL;
     }
 
@@ -42,3 +43,4 @@
   </script>
 </body>
 </html>
+
