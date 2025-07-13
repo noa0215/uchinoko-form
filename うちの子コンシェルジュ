@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>LINEログイン中...</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <p>LINEでログイン中です。Googleフォームに移動します...</p>
+  <script>
+    async function main() {
+      await liff.init({ liffId: "2007714606" }); // ←あなたのLIFF ID（OKです）
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      } else {
+        const profile = await liff.getProfile();
+        const userId = profile.userId;
+
+        // Make Webhook に送信
+        fetch("https://hook.us2.make.com/uxvshi0cnni32dq96fwaa9ixrd63cyey", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: userId })
+        }).then(() => {
+          // Googleフォームにリダイレクト
+          window.location.href = "https://forms.gle/52e57F3B8pMcVTqh6";
+        }).catch((e) => {
+          document.body.innerHTML = "<p>エラーが発生しました：" + e + "</p>";
+        });
+      }
+    }
+    main();
+  </script>
+</body>
+</html>
